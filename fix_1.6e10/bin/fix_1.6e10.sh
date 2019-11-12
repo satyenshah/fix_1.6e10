@@ -5,7 +5,7 @@
 # script changes epoch time match in etc/datetime.xml
 # matches it to 1600000000 which flips in 2020-09-13
 # restarts splunk
-# tested on RHEL7 and Solaris11
+# tested on RHEL7
 
 # set localization from international for grep
 LC_ALL="C"
