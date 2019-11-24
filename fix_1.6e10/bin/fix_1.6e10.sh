@@ -5,7 +5,7 @@
 # script changes epoch time match in etc/datetime.xml
 # matches it to 1600000000 which flips in 2020-09-13
 # restarts splunk
-# tested on RHEL7
+# tested on RHEL7 and Solaris11
 
 # set localization from international for grep
 LC_ALL="C"
@@ -17,13 +17,13 @@ fi
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
 DATETIMEXML="$SPLUNK_HOME/etc/datetime.xml"
+DATETIMENEW="$SCRIPTPATH/../static/datetime.xml"
 REBOOTFLAG=false
 
 EPOCHMATCHOLD=':1\[012345\]|9'
-EPOCHMATCHNEW=':1\[0123456\]|9'
 
 if (grep -q $EPOCHMATCHOLD $DATETIMEXML) ; then
- sed -i 's/'$EPOCHMATCHOLD'/'$EPOCHMATCHNEW'/' $DATETIMEXML
+ /bin/cp -rp $DATETIMENEW $DATETIMEXML
  if (!(grep -q $EPOCHMATCHOLD $DATETIMEXML)) ; then
   REBOOTFLAG=true
  fi

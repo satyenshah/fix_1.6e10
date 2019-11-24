@@ -1,7 +1,8 @@
- @echo off
+@echo off
 
- SET SPLUNK_HOME=%~1
+SET SPLUNK_HOME=%~1
 
- timeout /t 5
- "%SPLUNK_HOME%\bin\splunk.exe" restart
- exit
+timeout /t 5
+net stop SplunkForwarder
+net start SplunkForwarder
+exit
